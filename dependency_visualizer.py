@@ -19,8 +19,9 @@ def parse_packages_file(packages_file_path):
                 dependencies[current_package] = []
             elif line.startswith("Depends:") and current_package:
                 deps = line.split(":", 1)[1].strip()
-                dep_list = [dep.split()[0] for dep in deps.split(",")]
-                dependencies[current_package].extend(dep_list)
+                if deps:  # Добавлена проверка на пустую строку
+                    dep_list = [dep.split()[0] for dep in deps.split(",")]
+                    dependencies[current_package].extend(dep_list)
 
     return dependencies
 
