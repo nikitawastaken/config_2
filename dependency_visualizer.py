@@ -1,4 +1,5 @@
 import gzip
+from graphviz import Digraph
 
 
 def parse_packages_file(packages_file_path):
@@ -41,3 +42,17 @@ def build_dependency_graph(package_name, dependencies, graph=None, seen=None):
         build_dependency_graph(dep, dependencies, graph, seen)
 
     return graph
+
+
+def visualize_dependency_graph(graph, output_path, graphviz_program):
+    """
+    Визуализирует граф зависимостей с помощью Graphviz.
+    """
+    dot = Digraph(format="png", engine=graphviz_program)
+    
+    for package, deps in graph.items():
+        dot.node(package)
+        for dep in deps:
+            dot.edge(package, dep)
+    
+    dot.render(output_path, cleanup=True)
