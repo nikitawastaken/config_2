@@ -63,4 +63,5 @@
    ```
 
 4. Пример результата
+
 ![alt text](<./images/bash_output.png>)
