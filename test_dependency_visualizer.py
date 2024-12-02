@@ -103,4 +103,14 @@ Depends:
 
 
 if __name__ == "__main__":
-    unittest.main()
+    # Создаем тестовый набор
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestDependencyVisualizer)
+    
+    # Запускаем тесты с более подробным выводом
+    result = unittest.TextTestRunner(verbosity=2).run(suite)
+    
+    # Выводим сообщение об успехе или ошибках
+    if result.wasSuccessful():
+        print("\nВсе тесты пройдены успешно! 🎉")
+    else:
+        print(f"\nТесты завершены с ошибками. Провалено: {len(result.failures)} тест(ов).")
